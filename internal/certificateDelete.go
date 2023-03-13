@@ -8,6 +8,12 @@ import (
 	"strings"
 )
 
+// DeleteCertificate
+//   - Receives a personal token.
+//   - I/O operations.
+//   - Calls and creates a request.
+//   - Do the request.
+//   - Returns an error, if it does not exist, returns nil.
 func DeleteCertificate(token *string) error {
 	reader := bufio.NewReader(os.Stdin)
 

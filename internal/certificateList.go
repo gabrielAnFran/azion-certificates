@@ -21,6 +21,12 @@ type Certificate struct {
 	CertificateType string        `json:"certificate_type"`
 }
 
+// CertificatesList
+//   - Receives a personal token.
+//   - I/O operations.
+//   - Calls and creates a request.
+//   - Do the request.
+//   - Returns an error, if it does not exist, returns nil.
 func CertificatesList(token *string) error {
 
 	r, err := Request("GET", "", *token, nil)

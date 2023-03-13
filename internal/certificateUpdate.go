@@ -11,6 +11,10 @@ import (
 	"time"
 )
 
+// CertificateUpdateHandler
+//   - Receives a personal token.
+//   - I/O operations.
+//   - Returns an error, if it does not exist, returns nil.
 func CertificateUpdateHandler(personalToken *string) error {
 	var cert, privateKey, certName, id string
 	reader := bufio.NewReader(os.Stdin)
@@ -80,6 +84,11 @@ func CertificateUpdateHandler(personalToken *string) error {
 	return nil
 }
 
+// CertificateUpdate
+//   - Instantiates a CertificateBody, DTO for uploading a certificate.
+//   - Encode body to JSON.
+//   - Calls creation of a request.
+//   - Returns success or failure.
 func CertificateUpdate(token, name, certificate, priv_key, id *string) error {
 	body := CertificateBody{
 		Name:        *name,

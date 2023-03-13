@@ -54,7 +54,7 @@ func main() {
 		}
 
 		resumeProcess := ""
-		fmt.Println("Wish to do some other operatios? Y, N")
+		fmt.Println("Wish to do any other operation? Y, N")
 		fmt.Scanf("%s", &resumeProcess)
 		if resumeProcess == "Y" {
 			continue

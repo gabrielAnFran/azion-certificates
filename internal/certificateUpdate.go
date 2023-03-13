@@ -5,6 +5,8 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"io"
+	"log"
 	"net/http"
 	"os"
 	"strings"
@@ -107,16 +109,19 @@ func CertificateUpdate(token, name, certificate, priv_key, id *string) error {
 	}
 
 	client := &http.Client{}
-	_, err = client.Do(r)
+	res, err := client.Do(r)
 
 	if err != nil {
+		bytes, err := io.ReadAll(res.Body)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		fmt.Println("\nError")
+		fmt.Println(string(bytes))
 		return err
 	}
 
-	// err = CertificatesList(token)
-	// if err != nil {
-	// 	return err
-	// }
 	fmt.Println("Certificated Updated succesfully")
 	return nil
 }

@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"os"
 	"strings"
@@ -123,6 +124,14 @@ func NewCertificate(token, name, certificate, priv_key *string) error {
 	res, err := client.Do(r)
 
 	if err != nil {
+
+		bytes, err := io.ReadAll(res.Body)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		fmt.Println("\nError")
+		fmt.Println(string(bytes))
 		return err
 	}
 

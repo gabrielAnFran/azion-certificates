@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 )
 
@@ -38,6 +39,13 @@ func CertificatesList(token *string) error {
 	res, err := client.Do(r)
 
 	if err != nil {
+		bytes, err := io.ReadAll(res.Body)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		fmt.Println("\nError")
+		fmt.Println(string(bytes))
 		return err
 	}
 	b, _ := io.ReadAll(res.Body)

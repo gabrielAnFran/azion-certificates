@@ -3,6 +3,8 @@ package internal
 import (
 	"bufio"
 	"fmt"
+	"io"
+	"log"
 	"net/http"
 	"os"
 	"strings"
@@ -32,9 +34,16 @@ func DeleteCertificate(token *string) error {
 	}
 
 	client := &http.Client{}
-	_, err = client.Do(r)
+	res, err := client.Do(r)
 
 	if err != nil {
+		bytes, err := io.ReadAll(res.Body)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		fmt.Println("\nError")
+		fmt.Println(string(bytes))
 		return err
 	}
 	fmt.Println("Certificate: ", ID, " was succesfully deleted.")
